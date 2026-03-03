@@ -94,3 +94,27 @@ def signup_for_activity(activity_name: str, email: str):
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
+
+
+@app.delete("/activities/{activity_name}/participants")
+def remove_participant(activity_name: str, email: str):
+    """Remove a student from an activity's participant list.
+
+    The email address is provided as a query parameter. If the activity
+    doesn't exist or the student isn't signed up, an appropriate HTTP
+    error is raised. This keeps the API symmetric with the signup endpoint
+    and allows the front end to call a simple DELETE request.
+    """
+
+    # validate activity exists
+    if activity_name not in activities:
+        raise HTTPException(status_code=404, detail="Activity not found")
+
+    activity = activities[activity_name]
+
+    # validate student is actually signed up
+    if email not in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student not signed up")
+
+    activity["participants"].remove(email)
+    return {"message": f"Removed {email} from {activity_name}"}

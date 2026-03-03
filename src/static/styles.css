@@ -114,6 +114,30 @@ button:hover {
   border-radius: 4px;
 }
 
+/* styles for participants listing on activity cards */
+.participants-list {
+  margin-top: 5px;
+  padding-left: 20px;
+}
+
+.participants-list li {
+  margin-bottom: 3px;
+  line-height: 1.4;
+}
+
+/* hide default bullets and make remove icon look nice */
+.participants-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.remove-icon {
+  cursor: pointer;
+  color: #c62828;
+  margin-left: 8px;
+  font-weight: bold;
+}
+
 .success {
   background-color: #e8f5e9;
   color: #2e7d32;
